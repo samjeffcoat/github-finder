@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import NavBar from './components/layout/NavBar';
 import Users from './components/users/Users';
+import Search from './components/users/Search';
 import axios from 'axios';
 class App extends Component {
   state = {
@@ -20,6 +21,7 @@ class App extends Component {
       <div className='App'>
         <NavBar /*>title='Github Finder' icon='fab fa-github'*/ />
         <div className='container'>
+          <Search />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>
