@@ -9,19 +9,23 @@ class App extends Component {
     users: [],
     loading: false,
   };
-  async componentDidMount() {
+  //4. Making our request to the api
+  //5. setting the new state {res.data.items} to the users that are returned from out api
+  //search Github users
+  searchUsers = async (text) => {
     this.setState({ loading: true });
     const res = await axios.get(
-      `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
-    this.setState({ users: res.data, loading: false });
-  }
+    this.setState({ users: res.data.items, loading: false });
+  };
+  //{`3. when search users is fired we are going to call our function`}
   render() {
     return (
       <div className='App'>
         <NavBar /*>title='Github Finder' icon='fab fa-github'*/ />
         <div className='container'>
-          <Search />
+          <Search searchUsers={this.searchUsers} />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>
