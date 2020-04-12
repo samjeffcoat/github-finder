@@ -21,14 +21,7 @@ const App = () => {
   //4. Making our request to the api
   //5. setting the new state {res.data.items} to the users that are returned from out api
   //search Github users
-  const searchUsers = async (text) => {
-    setLoading(true);
-    const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    );
-    setUsers(res.data.items);
-    setLoading(false);
-  };
+
   //{`3. when search users is fired we are going to call our function`}
 
   //Get Single Github user
@@ -75,7 +68,6 @@ const App = () => {
                 render={(props) => (
                   <Fragment>
                     <Search
-                      searchUsers={searchUsers}
                       clearUsers={clearUsers}
                       showClear={users.length > 0 ? true : false}
                       setAlert={showAlert}
